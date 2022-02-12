@@ -15,6 +15,8 @@ So that there is no cheating
 
 ## Components Folder
 1) Header.js
+2) QuestionSection.js
+3) Footer.js
 
 
 ## Available Scripts

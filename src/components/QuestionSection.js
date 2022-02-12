@@ -1,16 +1,57 @@
+import {useState} from 'react';
 
 
-const QuestionSection = ({handleAnswerOptionClick, currentQuestion, questions, score, showScore}) => {
+const QuestionSection = () => {
+	const questions = [
+		{
+			questionText: "The first ever commercial bungee jump took place in which country?",
+			answerOptions: [
+				{ id: 1, answerLetter: 'a)', answerText: "South Africa", correct: false },
+				{ id: 2, answerLetter: 'b)', answerText: "Australia", correct: false },
+				{ id: 3, answerLetter: 'c)', answerText: "New Zealand", correct: true },
+			],
+		},
+		{
+			questionText: "When did the British children's television programme Blue Peter first air?",
+			answerOptions: [
+				{ id: 1, answerLetter: 'a)', answerText: "1958", correct: true },
+				{ id: 2, answerLetter: 'b)', answerText: "1968", correct: false},
+				{ id: 3, answerLetter: 'c)', answerText: "1978", correct: false },
+			],
+		},
+		{
+			questionText: "Where did Disney open a resort on June 16, 2016? ",
+			answerOptions: [
+				{ id: 1, answerLetter: 'a)', answerText: "Singapore", correct: false },
+				{ id: 2, answerLetter: 'b)', answerText: "Shanghai", correct: true },
+				{ id: 3, answerLetter: 'c)', answerText: "Tokyo", correct: false },
+			],
+		},
+	];
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [showScore, setShowScore] = useState(false);
+	const [score, setScore] = useState(0);
+	
+
+	const handleAnswerOptionClick = (correct) => {
+		if (correct) {
+			setScore(score + 1);
+
+		}
+
+		const nextQuestion = currentQuestion + 1;
+		if (nextQuestion < questions.length) {
+			setCurrentQuestion(nextQuestion);
+		} else {
+			setShowScore(true);
+		}
+	};
   return (
-    <questionSection className = 'questionSection'
-    onClick = {handleAnswerOptionClick}
-    currentQuestion ={currentQuestion}
-    questions ={questions}
-    score ={score}
-    >
+	<questionSection>
+	<div className='questionSection'>
 			{showScore ? (
 				<div className='score-section'>
-					You answered correctly {score} out of {questions.length}
+					You scored {score} out of {questions.length}
 				</div>
 			) : (
 				<>
@@ -22,12 +63,13 @@ const QuestionSection = ({handleAnswerOptionClick, currentQuestion, questions, s
 					</div>
 					<div className='answer-section'>
 						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<button onClick={() => handleAnswerOptionClick(answerOption.correc)}>{answerOption.answerText}</button>
+							<button key = {answerOption.id} onClick={() => handleAnswerOptionClick(answerOption.correct)}>{answerOption.answerLetter} {answerOption.answerText}</button>
 						))}
 					</div>
 				</>
 			)}
-			</questionSection>
+		</div>
+	</questionSection>
   )
 }
 
