@@ -1,6 +1,6 @@
 # Project title: Pub Quiz
 
-See it live: https://main.d26hg8cq5wi0pf.amplifyapp.com/
+
 
 ## Description
 
