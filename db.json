@@ -1,0 +1,27 @@
+{
+  "questions": [{
+    "questionText": "The first ever commercial bungee jump took place in which country?",
+    "answerOptions": [
+      { "id": "a)", "answerText": "South Africa", "correct": false },
+      { "id": "b)", "answerText": "Australia", "correct": false },
+      { "id": "c)", "answerText": "New Zealand", "correct": true }
+    ]
+  },
+  {
+    "questionText": "When did the British children's television programme Blue Peter first air?",
+    "answerOptions": [
+      { "id": "a)", "answerText": "1958", "correct": true },
+      { "id": "b)", "answerText": "1968", "correct": false},
+      { "id": "c)", "answerText": "1978"," correct": false }
+    ]
+  },
+  {
+    "questionText": "Where did Disney open a resort on June 16, 2016? ",
+    "answerOptions": [
+      { "id": "a)", "answerText": "Singapore", "correct": false },
+      { "id": "b)", "answerText": "Shanghai", "correct": true },
+      { "id": "c)", "answerText": "Tokyo", "correct": false }
+    ]
+  }
+  ]
+}

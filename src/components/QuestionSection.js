@@ -1,43 +1,35 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 
 const QuestionSection = () => {
-	const questions = [
-		{
-			questionText: "The first ever commercial bungee jump took place in which country?",
-			answerOptions: [
-				{ id: 1, answerLetter: 'a)', answerText: "South Africa", correct: false },
-				{ id: 2, answerLetter: 'b)', answerText: "Australia", correct: false },
-				{ id: 3, answerLetter: 'c)', answerText: "New Zealand", correct: true },
-			],
-		},
-		{
-			questionText: "When did the British children's television programme Blue Peter first air?",
-			answerOptions: [
-				{ id: 1, answerLetter: 'a)', answerText: "1958", correct: true },
-				{ id: 2, answerLetter: 'b)', answerText: "1968", correct: false},
-				{ id: 3, answerLetter: 'c)', answerText: "1978", correct: false },
-			],
-		},
-		{
-			questionText: "Where did Disney open a resort on June 16, 2016? ",
-			answerOptions: [
-				{ id: 1, answerLetter: 'a)', answerText: "Singapore", correct: false },
-				{ id: 2, answerLetter: 'b)', answerText: "Shanghai", correct: true },
-				{ id: 3, answerLetter: 'c)', answerText: "Tokyo", correct: false },
-			],
-		},
-	];
+	const [questions, setQuestions] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
 	
+	
+	useEffect(() => {
+		const getQuestions = async () => {
+			const questionsFromServer = await fetchQuestions()
+			setQuestions(questionsFromServer)
+		}
 
+		getQuestions()
+	}, [])
+    //Fetch questions 
+	const fetchQuestions = async () => {
+		const res = await fetch ('http://localhost:5000/questions');
+		const data = await res.json();
+		
+		return data 
+	}
+	
+    
 	const handleAnswerOptionClick = (correct) => {
 		if (correct) {
 			setScore(score + 1);
-
-		}
+			
+		} 
 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
@@ -59,11 +51,19 @@ const QuestionSection = () => {
 						<div className='question-count'>
 							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[currentQuestion].questionText}</div>
+						<div className='question-text'>{questions[currentQuestion]?.questionText}</div>
 					</div>
 					<div className='answer-section'>
-						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<button key = {answerOption.id} onClick={() => handleAnswerOptionClick(answerOption.correct)}>{answerOption.answerLetter} {answerOption.answerText}</button>
+						{questions[currentQuestion]?.answerOptions.map((answerOption) => (
+							<button 
+							className = 'btn'
+							key = {answerOption.id} 
+							onClick={() => {
+							handleAnswerOptionClick(answerOption.correct);
+							
+							}}>
+							{answerOption.id} {answerOption.answerText}
+							</button>
 						))}
 					</div>
 				</>
