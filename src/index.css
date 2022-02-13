@@ -38,13 +38,12 @@ button {
   padding: 5px;
   justify-content: flex-start;
   align-items: center;
-
+  border: 2px solid grey;
   cursor: pointer;
 }
 
-.btn {
-  border: 2px solid grey;
-}
+
+
 
 button:hover {
   background-color: #69a297;
@@ -70,10 +69,10 @@ Header {
 
 
 .correct {
-  border: 2px solid green;
+  border: 5px solid green;
 
 }
 
 .incorrect {
-  border: 2px solid red;
+  border: 5px solid red;
 }
